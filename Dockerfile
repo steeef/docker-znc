@@ -8,7 +8,10 @@ RUN buildDeps=" \
     libssl-dev \
     pkg-config \
     "; \
-    apt-get update && apt-get install -y --no-install-recommends $buildDeps \
+    apt-get update && apt-get install -y --no-install-recommends \
+    $buildDeps \
+    libssl1.0.0 \
+    sudo \
     && rm -rf /var/lib/apt/lists/* \
     && curl -SL "http://znc.in/releases/archive/znc-1.4.tar.gz" -o znc.tar.gz \
     && mkdir -p /src/znc \
@@ -23,12 +26,14 @@ RUN buildDeps=" \
     && apt-get purge -y $buildDeps \
     && apt-get autoremove -y
 
-RUN useradd znc \
+COPY znc.conf.default /data/znc.conf.default
+
+RUN useradd -m znc \
     && mkdir -p /data/configs \
     && ln -s /data /home/znc/.znc \
     && chown -R znc. /data \
     && [ ! -f /data/configs/znc.conf ] \
-    && sudo -u znc znc --makeconf
+    && sudo -u /data/znc.conf.default /data/configs/znc.conf
 
 COPY docker-entrypoint.sh /entrypoint.sh
 ENTRYPOINT ["/entrypoint.sh"]
