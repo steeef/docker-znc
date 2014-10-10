@@ -33,7 +33,7 @@ RUN useradd -m znc \
     && ln -s /data /home/znc/.znc \
     && chown -R znc. /data \
     && [ ! -f /data/configs/znc.conf ] \
-    && sudo -u /data/znc.conf.default /data/configs/znc.conf
+    && sudo -u znc cp /data/znc.conf.default /data/configs/znc.conf
 
 COPY docker-entrypoint.sh /entrypoint.sh
 ENTRYPOINT ["/entrypoint.sh"]
