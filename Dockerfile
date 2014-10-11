@@ -11,7 +11,6 @@ RUN buildDeps=" \
     apt-get update && apt-get install -y --no-install-recommends \
     $buildDeps \
     libssl1.0.0 \
-    sudo \
     && rm -rf /var/lib/apt/lists/* \
     && curl -SL "http://znc.in/releases/archive/znc-1.4.tar.gz" -o znc.tar.gz \
     && mkdir -p /src/znc \
