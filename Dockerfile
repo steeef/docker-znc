@@ -33,4 +33,5 @@ COPY entrypoint.sh /entrypoint.sh
 
 EXPOSE 6667
 
-ENTRYPOINT ['/entrypoint.sh']
+ENTRYPOINT ["/entrypoint.sh"]
+CMD [""]
