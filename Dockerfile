@@ -35,7 +35,6 @@ RUN useradd -m znc \
     && [ ! -f /data/configs/znc.conf ] \
     && sudo -u znc cp /data/znc.conf.default /data/configs/znc.conf
 
-COPY docker-entrypoint.sh /entrypoint.sh
-ENTRYPOINT ["/entrypoint.sh"]
-
 EXPOSE 6667
+
+CMD sudo -u znc /usr/local/bin/znc --datadir="/data" --foreground
