@@ -26,15 +26,11 @@ RUN buildDeps=" \
     && apt-get purge -y $buildDeps \
     && apt-get autoremove -y
 
-COPY znc.conf.default /src/znc.conf.default
+RUN useradd znc
 
-RUN useradd -m znc \
-    && mkdir -p /data/configs \
-    && ln -s /data /home/znc/.znc \
-    && chown -R znc. /data \
-    && [ ! -f /data/configs/znc.conf ] \
-    && sudo -u znc cp /src/znc.conf.default /data/configs/znc.conf
+COPY znc.conf.default /src/znc.conf.default
+COPY entrypoint.sh /entrypoint.sh
 
 EXPOSE 6667
 
-CMD sudo -u znc /usr/local/bin/znc --datadir="/data" --foreground
+ENTRYPOINT ['/entrypoint.sh']
