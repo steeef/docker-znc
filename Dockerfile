@@ -12,7 +12,7 @@ RUN buildDeps=" \
     $buildDeps \
     libssl1.0.0 \
     && rm -rf /var/lib/apt/lists/* \
-    && curl -SL "http://znc.in/releases/archive/znc-1.4.tar.gz" -o znc.tar.gz \
+    && curl -SL "http://znc.in/releases/znc-1.6.0-rc1.tar.gz" -o znc.tar.gz \
     && mkdir -p /src/znc \
     && tar -zxvf znc.tar.gz -C /src/znc --strip-components=1 \
     && rm -f znc.tar.gz* \
