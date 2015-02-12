@@ -15,6 +15,8 @@ RUN buildDeps=" \
     && curl -SL "http://znc.in/releases/znc-1.6.0-rc1.tar.gz" -o znc.tar.gz \
     && mkdir -p /src/znc \
     && tar -zxvf znc.tar.gz -C /src/znc --strip-components=1 \
+    && curl -kSL "https://raw.githubusercontent.com/jpnurmi/znc-chanfilter/master/chanfilter.cpp" -o /src/znc/modules/chanfilter.cpp \
+    && curl -kSL "https://raw.githubusercontent.com/jpnurmi/znc-clientbuffer/master/clientbuffer.cpp" -o /src/znc/modules/clientbuffer.cpp \
     && rm -f znc.tar.gz* \
     && cd /src/znc \
     && ./configure \
